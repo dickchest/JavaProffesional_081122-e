@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class PayRollTest {
     public void init() {
         //System.out.println("before");
         employees = new ArrayList<>();
-        employeeDB = mock(EmployeeDB.class);
+        employeeDB = Mockito.mock(EmployeeDB.class);
         bankService = mock(BankService.class);
 
         when(employeeDB.getAllEmployees()).thenReturn(employees);
