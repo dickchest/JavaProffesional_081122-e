@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
 5)	Написать программу эмуляции работы фуникулера.
@@ -26,11 +27,11 @@ public class FunicularMyVer2 {
     private static String EXIT = " exit the cabin";
     private static String ARRIVE = " train gets to station # ";
 
+    static int paxQuantity = new Random().nextInt(2, 10);
     public static void main(String[] args) {
         // Екзекьютор сервис = для формирования потоков-пассажиров
-        int paxQuantity = new Random().nextInt(1, 10);
         System.out.println("Total amount of pax: " + paxQuantity);
-        ExecutorService paxExecutor = Executors.newFixedThreadPool(2);
+        ExecutorService paxExecutor = Executors.newFixedThreadPool(paxQuantity);
         // Файзер = для формирования фаз прохождения
         Phaser phaser = new Phaser(1) {
             @Override
@@ -45,10 +46,13 @@ public class FunicularMyVer2 {
             // Пассажир приходит на платформу и ожидает
             while (phaser.getRegisteredParties() > MAX_PAX || phaser.getPhase() % 2 != 0) {
 //                System.out.println(phaser.getRegisteredParties());
-//                sleepTread(1000);
+//                sleepTread(200);
             }
+//            System.out.println(phaser.getPhase() + " зареригено " + phaser.getRegisteredParties());
+
             phaser.register();
-            System.out.println(Thread.currentThread().getName() + " пришел на платформу");
+            System.out.println(phaser.getPhase() + " зареригено " + phaser.getRegisteredParties());
+            System.out.println(Thread.currentThread().getName() + " пришел на платформу на фазе " + phaser.getPhase());
             // заходит в фуникуляер
             phaser.arriveAndAwaitAdvance();
             System.out.println(Thread.currentThread().getName() + ENTER);
@@ -58,7 +62,11 @@ public class FunicularMyVer2 {
 //            phaser.arriveAndAwaitAdvance();
             phaser.arriveAndAwaitAdvance();
             System.out.println(Thread.currentThread().getName() + EXIT);
-            phaser.arriveAndDeregister();
+//            phaser.arriveAndDeregister();
+            System.out.println("вышел на фазе" + phaser.getPhase());
+//            phaser.arriveAndDeregister();
+            paxQuantity--;
+            System.out.println("Числа пасико: " + paxQuantity);
 
         };
 
@@ -69,7 +77,7 @@ public class FunicularMyVer2 {
         }
 
 
-        while(paxQuantity> 0) {
+        while(paxQuantity > 0) {
             // фуникулер подьезжаем к начальной точке
             arriving(phaser, OPEN_DOOR);
             // фуникулер подьезжаем к конечной точке
@@ -77,8 +85,9 @@ public class FunicularMyVer2 {
             // возвращаемся назад
 
             sleepTread(2000);
-            phaser.bulkRegister(1);
 
+//            phaser.arriveAndAwaitAdvance();
+            phaser.bulkRegister(1);
         }
             paxExecutor.shutdown();
     }
@@ -88,13 +97,13 @@ public class FunicularMyVer2 {
         System.out.println(ARRIVE + phaser.getPhase());
 
         // октрываем двери
-        System.out.println(OPEN_DOOR);
+        System.out.println(OPEN_DOOR + " фаза " + phaser.getPhase());
         phaser.arriveAndAwaitAdvance();
         sleepTread(1500);
 
         // закрываем двери
         System.out.println(CLOSE_DOOR);
-        sleepTread(5000);
+        sleepTread(1500);
     }
 
     public static void sleepTread(int duration) {

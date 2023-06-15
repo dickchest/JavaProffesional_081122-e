@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ArrayListToDoRepository implements ToDoRepository{
+public class ArrayListToDoRepository implements ToDoRepository {
 
     private Integer idSequence = 1;
     private List<ToDoEntity> database = new ArrayList<>();
+
     @Override
     public ToDoEntity save(ToDoEntity entity) {
-        if (entity.getId() != 0) {
+        if (entity.getId() != null) {
             return update(entity);
         } else {
             entity.setId(idSequence);
@@ -23,7 +24,7 @@ public class ArrayListToDoRepository implements ToDoRepository{
         return entity;
     }
 
-    private ToDoEntity update (ToDoEntity entity) {
+    private ToDoEntity update(ToDoEntity entity) {
         for (int i = 0; i < database.size(); i++) {
             var existingEntity = database.get(i);
             if (existingEntity.getId() == entity.getId()) {
