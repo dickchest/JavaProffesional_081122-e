@@ -1,9 +1,11 @@
 package javaProfessionalCourse2.lesson28.volatileExample;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BankApp {
     public static void main(String[] args) {
         BankAccount account = new BankAccount();
-
         Runnable depositRunnable = () -> {
             for (int i = 0; i < 1000; i++) {
                 account.deposit(10);
@@ -22,7 +24,7 @@ public class BankApp {
         depositThread.start();
         withdrawThread.start();
 
-        /// TODO: 07.06.2023 почему разный баланс
+        //почему разный баланс
 
         try {
             depositThread.join();

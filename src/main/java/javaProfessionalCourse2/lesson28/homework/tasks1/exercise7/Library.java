@@ -49,7 +49,7 @@ public class Library {
     }
 
     private Book getBook(int idBook){
-        // todo дописать условие, если книги нет
+        // дописать условие, если книги нет
         return books.get(idBook);
     }
 }
