@@ -1,7 +1,5 @@
 package javaProfessionalCourse2.lesson28.volatileExample;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class BankApp {
     public static void main(String[] args) {
