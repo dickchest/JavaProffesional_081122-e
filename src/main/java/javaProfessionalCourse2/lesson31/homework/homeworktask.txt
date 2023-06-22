@@ -1,0 +1,18 @@
+Домашнее задание:
+Создайте проект Spring с помощью start.spring.io .
+Создайте POJO класс.
+
+1)Настройте bean-компонент Student в файле bean-factory-demo.xml
+2) java-конфиг
+3) аннотации
+
+Запишите его в класс приложения.
+
+
+// POJO class
+public class Student {
+
+  // Member variables
+  private String name;
+  private String age;
+  }
