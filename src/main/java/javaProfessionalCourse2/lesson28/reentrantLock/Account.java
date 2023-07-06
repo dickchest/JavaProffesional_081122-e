@@ -1,7 +1,5 @@
 package javaProfessionalCourse2.lesson28.reentrantLock;
 
-import javaProfessionalCourse2.lesson29.application.console.ConsoleUI;
-
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

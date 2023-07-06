@@ -8,7 +8,7 @@ public class DeveloperDatabaseManager {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DATABASE_URL = "jdbc:mysql://localhost:3306/javatest";
     static final String USER = "root";
-    static final String PASSWORD = "dancer1977";
+    static final String PASSWORD = "root";
 
 
     Connection connection = null;
