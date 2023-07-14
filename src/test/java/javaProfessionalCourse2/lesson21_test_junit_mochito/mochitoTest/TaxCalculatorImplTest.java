@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 class TaxCalculatorImplTest {
 
+
     @Test
     void testCalculatorTax2011() {
         CurrentYearProvider currentYearProvider = mock(CurrentYearProvider.class);

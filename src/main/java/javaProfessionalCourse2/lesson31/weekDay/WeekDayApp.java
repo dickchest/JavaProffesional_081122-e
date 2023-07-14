@@ -11,7 +11,7 @@ public class WeekDayApp {
 
         WeekDay weekDay = context.getBean(WeekDay.class);
 
-        System.out.println("It is " + weekDay.getWeekDayName() + " todoay!");
+        System.out.println("It is " + weekDay.getWeekDayName() + " today!");
 
 
     }
